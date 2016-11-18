@@ -1,0 +1,14 @@
+{
+  "name": "repreact",
+  "version": "1.0.0",
+  "ocaml-config": {
+    "sources": [
+      {
+        "dir": "src",
+        "files": {
+          "slow-re": "[A-Za-z]+\\.re"
+        }
+      }
+    ]
+  }
+}
