@@ -1,5 +1,5 @@
 {
-  "name": "Repreact",
+  "name": "repreact",
   "version": "1.0.0",
   "description": "Example project with Reason as a dependency, building with Rebel",
   "license": "MIT",
@@ -18,10 +18,10 @@
   ],
   "scripts": {
     "start": "watch --filter=watch-filter 'npm run build' src",
+    "build": "./node_modules/bs-platform/bin/bsb.exe && npm run js-to-jsx && npm run js-format",
     "postinstall": "npm run build",
-    "build": "eval $(dependencyEnv) && nopam && OCAMLLIB='./node_modules/bs-platform/lib/ocaml' rebel && npm run js-to-jsx && npm run js-format",
-    "js-format": "esformatter -i dist/**/*.js",
-    "js-to-jsx": "babel _build/default/src -d dist/",
+    "js-format": "esformatter -i lib/js/dist/**/*.js",
+    "js-to-jsx": "babel lib/js/src -d lib/js/dist",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
     "editor": "eval $(dependencyEnv) && eval $EDITOR",
@@ -37,17 +37,7 @@
     "ocamlBetterErrors": "0.0.10",
     "preact": "^6.4.0",
     "realpath": "*",
-    "reason": "git+https://github.com/facebook/reason.git",
-    "rebel": "git+https://github.com/reasonml/rebel.git"
-  },
-  "rebel": {
-    "targets": [
-      {
-        "target": "default",
-        "engine": "bucklescript",
-        "entry": "src/index.re"
-      }
-    ]
+    "reason": "git+https://github.com/facebook/reason.git"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -66,7 +56,6 @@
       "type": "single"
     }
   },
-  "main": "watch-filter.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rcsole/repreact.git"
