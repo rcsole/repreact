@@ -17,11 +17,13 @@
     "Note: `rebuild` has nothing to do with the officially supported `npm rebuild` command."
   ],
   "scripts": {
-    "start": "watch --filter=watch-filter 'npm run build' src",
-    "build": "./node_modules/bs-platform/bin/bsb.exe && npm run js-to-jsx && npm run js-format",
+    "start": "concurrently -k 'npm run watch' 'npm run webpack-server'",
+    "watch": "watch --filter=watch-filter 'npm run build' src",
+    "build": "./node_modules/bs-platform/bin/bsb.exe",
     "postinstall": "npm run build",
-    "js-format": "esformatter -i lib/js/dist/**/*.js",
-    "js-to-jsx": "babel lib/js/src -d lib/js/dist",
+    "webpack": "webpack",
+    "webpack-server": "webpack-dev-server --inline --hot",
+    "postinstall": "npm run build",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
     "editor": "eval $(dependencyEnv) && eval $EDITOR",
@@ -41,20 +43,13 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-plugin-transform-preact-h-to-jsx": "^1.0.0",
-    "esformatter": "^0.10.0",
-    "esformatter-jsx": "^7.2.0",
-    "esformatter-quotes": "^1.1.0",
-    "watch": "^1.0.1"
-  },
-  "esformatter": {
-    "plugins": [
-      "esformatter-jsx",
-      "esformatter-quotes"
-    ],
-    "quotes": {
-      "type": "single"
-    }
+    "babel-loader": "^6.2.7",
+    "babel-preset-es2015": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "html-webpack-plugin": "^2.24.1",
+    "watch": "^1.0.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   },
   "repository": {
     "type": "git",
