@@ -1,5 +1,0 @@
-{
-  "plugins": [
-    "transform-preact-h-to-jsx"
-  ]
-}
